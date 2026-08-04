@@ -20,5 +20,6 @@ body { background: #f5f7fb; color: #1f2937; }
 .grade-row { border-bottom: 1px solid #eef1f6; padding: .65rem 0; }
 .grade-row:last-child { border-bottom: 0; }
 .grade-score { font-weight: 700; }
+.search-input { min-width: 180px; }
 button { transition: transform .15s ease; }
 button:active { transform: scale(.98); }
