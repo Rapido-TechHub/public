@@ -1,0 +1,24 @@
+:root { --bs-primary: #3157d5; --bs-primary-rgb: 49, 87, 213; }
+body { background: #f5f7fb; color: #1f2937; }
+.navbar { background: linear-gradient(110deg, #2748b9, #4169e1) !important; }
+.brand-dot { color: #ffd166; }
+.eyebrow { color: #3157d5; font-size: .7rem; font-weight: 800; letter-spacing: .12em; }
+.stat-card { background: #fff; border: 1px solid #e9edf5; border-radius: .75rem; padding: 1rem 1.25rem; box-shadow: 0 .125rem .25rem rgba(31, 41, 55, .04); }
+.stat-card span { color: #6b7280; display: block; font-size: .82rem; margin-bottom: .25rem; }
+.stat-card strong { display: block; font-size: 1.65rem; }
+.card { border-radius: .8rem; }
+.form-control:focus { border-color: #6c8bf0; box-shadow: 0 0 0 .2rem rgba(49, 87, 213, .12); }
+.table thead th { background: #fbfcfe; color: #6b7280; font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.table td, .table th { border-color: #eef1f6; }
+.student-name { font-weight: 650; }
+.student-email { color: #8a94a6; font-size: .78rem; }
+.status { border-radius: 999px; display: inline-block; font-size: .7rem; font-weight: 750; padding: .35rem .6rem; }
+.status-approved { background: #e4f7ed; color: #198754; }
+.status-failed { background: #fde8e8; color: #dc3545; }
+.status-pending { background: #fff4d6; color: #9a6700; }
+.empty-icon { background: #edf1ff; border-radius: 50%; color: #3157d5; display: inline-grid; font-size: 1.25rem; height: 2.5rem; margin-bottom: .75rem; place-items: center; width: 2.5rem; }
+.grade-row { border-bottom: 1px solid #eef1f6; padding: .65rem 0; }
+.grade-row:last-child { border-bottom: 0; }
+.grade-score { font-weight: 700; }
+button { transition: transform .15s ease; }
+button:active { transform: scale(.98); }
