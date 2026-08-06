@@ -143,8 +143,27 @@ $('#grades-list').addEventListener('click', async (event) => {
   }
 });
 
+const splashStartTime = Date.now();
+const MIN_SPLASH_TIME_MS = 1200;
+
+function hideSplashScreen() {
+  const splash = $('#splash-screen');
+  if (!splash) return;
+  const elapsed = Date.now() - splashStartTime;
+  const remaining = Math.max(0, MIN_SPLASH_TIME_MS - elapsed);
+
+  setTimeout(() => {
+    splash.classList.add('splash-hidden');
+    setTimeout(() => splash.remove(), 600);
+  }, remaining);
+}
+
 $('#cancel-edit').addEventListener('click', resetStudentForm);
 $('#cancel-grade-edit').addEventListener('click', resetGradeForm);
 $('#refresh-button').addEventListener('click', () => loadStudents().catch((error) => showAlert(error.message, 'danger')));
 $('#student-search').addEventListener('input', renderStudents);
-loadStudents().catch((error) => showAlert(error.message, 'danger'));
+
+loadStudents()
+  .catch((error) => showAlert(error.message, 'danger'))
+  .finally(() => hideSplashScreen());
+
