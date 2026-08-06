@@ -2,6 +2,7 @@
 body { background: #f5f7fb; color: #1f2937; }
 .navbar { background: linear-gradient(110deg, #2748b9, #4169e1) !important; }
 .brand-dot { color: #ffd166; }
+.fs-7 { font-size: .7rem; font-weight: 700; opacity: .9; }
 .eyebrow { color: #3157d5; font-size: .7rem; font-weight: 800; letter-spacing: .12em; }
 .stat-card { background: #fff; border: 1px solid #e9edf5; border-radius: .75rem; padding: 1rem 1.25rem; box-shadow: 0 .125rem .25rem rgba(31, 41, 55, .04); }
 .stat-card span { color: #6b7280; display: block; font-size: .82rem; margin-bottom: .25rem; }
