@@ -1,3 +1,5 @@
+V1.0.1
+
 # Sistema de notas de alunos
 
 CRUD básico desenvolvido com NestJS, TypeORM, SQLite e Bootstrap. O Express usado pelo Nest serve o frontend da pasta `public`.

@@ -37,12 +37,16 @@ function renderStats() {
 
 function renderStudents() {
   const table = $('#students-table');
-  if (!state.students.length) {
+  const search = $('#student-search').value.trim().toLowerCase();
+  const students = state.students.filter((student) =>
+    `${student.name} ${student.email || ''}`.toLowerCase().includes(search),
+  );
+  if (!students.length) {
     table.innerHTML = '<tr><td colspan="5" class="text-center text-secondary py-5">Nenhum aluno cadastrado.</td></tr>';
     renderStats();
     return;
   }
-  table.innerHTML = state.students.map((student) => `
+  table.innerHTML = students.map((student) => `
     <tr class="${state.selectedStudentId === student.id ? 'table-primary' : ''}">
       <td class="ps-4"><div class="student-name">${escapeHtml(student.name)}</div><div class="student-email">${escapeHtml(student.email || 'Sem e-mail')}</div></td>
       <td><strong>${student.average === null ? '—' : student.average.toFixed(2).replace('.', ',')}</strong></td>
@@ -139,7 +143,27 @@ $('#grades-list').addEventListener('click', async (event) => {
   }
 });
 
+const splashStartTime = Date.now();
+const MIN_SPLASH_TIME_MS = 1200;
+
+function hideSplashScreen() {
+  const splash = $('#splash-screen');
+  if (!splash) return;
+  const elapsed = Date.now() - splashStartTime;
+  const remaining = Math.max(0, MIN_SPLASH_TIME_MS - elapsed);
+
+  setTimeout(() => {
+    splash.classList.add('splash-hidden');
+    setTimeout(() => splash.remove(), 600);
+  }, remaining);
+}
+
 $('#cancel-edit').addEventListener('click', resetStudentForm);
 $('#cancel-grade-edit').addEventListener('click', resetGradeForm);
 $('#refresh-button').addEventListener('click', () => loadStudents().catch((error) => showAlert(error.message, 'danger')));
-loadStudents().catch((error) => showAlert(error.message, 'danger'));
+$('#student-search').addEventListener('input', renderStudents);
+
+loadStudents()
+  .catch((error) => showAlert(error.message, 'danger'))
+  .finally(() => hideSplashScreen());
+

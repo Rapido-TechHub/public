@@ -8,6 +8,26 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+      <div class="splash-content text-center">
+        <div class="splash-logo-wrapper mb-3">
+          <div class="splash-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0 1 1v-2h.5a.5.5 0 0 0 .5-.5V7.476a.5.5 0 0 0-.256-.434l-7.5-5zm-5.71 5.385l5.5 2.2 5.5-2.2-5.5-2.2-5.5 2.2z"/>
+              <path d="M4.1 9.46v2.122c0 .413.432.884 1.13 1.258C6.183 13.344 7.37 13.5 8 13.5c.63 0 1.817-.156 2.77-.62.698-.374 1.13-.845 1.13-1.258V9.46l-3.51 1.404a2 2 0 0 1-1.56 0L4.1 9.46z"/>
+            </svg>
+          </div>
+        </div>
+        <h1 class="splash-title">Notas<span class="brand-dot">.</span></h1>
+        <p class="splash-subtitle">Gestão acadêmica</p>
+        <div class="splash-loader-bar mt-4">
+          <div class="splash-loader-progress"></div>
+        </div>
+        <p class="splash-status mt-2" id="splash-status">Carregando sistema...</p>
+      </div>
+    </div>
+
     <nav class="navbar navbar-dark bg-primary shadow-sm">
       <div class="container">
         <span class="navbar-brand mb-0 h1">Notas<span class="brand-dot">.</span></span>
@@ -92,9 +112,12 @@
         <div class="col-lg-8">
           <section class="card border-0 shadow-sm">
             <div class="card-body p-0">
-              <div class="p-4 pb-3 d-flex justify-content-between align-items-center">
+              <div class="p-4 pb-3 d-flex flex-wrap gap-2 justify-content-between align-items-center">
                 <h2 class="h5 mb-0">Lista de alunos</h2>
-                <span class="badge rounded-pill text-bg-light" id="student-count">0 registros</span>
+                <div class="d-flex align-items-center gap-2">
+                  <input class="form-control form-control-sm search-input" id="student-search" type="search" placeholder="Buscar aluno..." aria-label="Buscar aluno" />
+                  <span class="badge rounded-pill text-bg-light" id="student-count">0 registros</span>
+                </div>
               </div>
               <div class="table-responsive">
                 <table class="table align-middle mb-0">
