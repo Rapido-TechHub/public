@@ -4,10 +4,10 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Grade } from './grade.entity';
+} from "typeorm";
+import { Grade } from "./grade.entity";
 
-@Entity('students')
+@Entity("students")
 export class Student {
   @PrimaryGeneratedColumn()
   id: number;
@@ -15,7 +15,7 @@ export class Student {
   @Column({ length: 120 })
   name: string;
 
-  @Column({ type: 'varchar', length: 160, nullable: true, unique: true })
+  @Column({ type: "varchar", length: 160, nullable: true, unique: true })
   email: string | null;
 
   @CreateDateColumn()

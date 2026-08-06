@@ -1,6 +1,13 @@
-import { Type } from 'class-transformer';
-import { IsNumber, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
-import { env } from '../../config/env';
+import { Type } from "class-transformer";
+import {
+  IsNumber,
+  IsString,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+} from "class-validator";
+import { env } from "../../config/env";
 
 export class CreateGradeDto {
   @IsString()
