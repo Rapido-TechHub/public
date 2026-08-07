@@ -9,5 +9,6 @@ env/
 instance/
 .pytest_cache/
 *.egg-info/
+dist/
 
-data/
+data/

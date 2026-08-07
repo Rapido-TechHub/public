@@ -13,7 +13,9 @@ app.secret_key = os.getenv("SECRET_KEY", "default-flask-secret")
 # Configurações do App obtidas do .env
 APP_TITLE = os.getenv("APP_TITLE", "Flask Project")
 APP_SUBTITLE = os.getenv("APP_SUBTITLE", "Gerenciador simples em Flask")
-DATABASE_PATH = os.getenv("DATABASE_PATH", "data/database.db")
+DATA_PATH = os.getenv("DATA_PATH", "data")
+_db_rel = os.getenv("DATABASE_PATH", "db/database.db")
+DATABASE_PATH = _db_rel if os.path.isabs(_db_rel) else os.path.join(DATA_PATH, _db_rel.lstrip("/\\"))
 PORT = int(os.getenv("PORT", "5000"))
 
 def get_db():
