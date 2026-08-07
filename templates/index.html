@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- Header Hero Card -->
+    <div class="col-12">
+        <div class="hero-card p-4 rounded-4 text-white shadow-sm mb-2">
+            <h1 class="display-6 fw-bold mb-1">{{ app_title }}</h1>
+            <p class="mb-0 opacity-75">{{ app_subtitle }}</p>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="col-md-4">
+        <div class="stat-box p-3 bg-white border rounded-3 shadow-sm">
+            <span class="text-muted small">Total de Tarefas</span>
+            <h2 class="fw-bold mb-0 text-primary">{{ total }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stat-box p-3 bg-white border rounded-3 shadow-sm">
+            <span class="text-muted small">Concluídas</span>
+            <h2 class="fw-bold mb-0 text-success">{{ concluidas }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stat-box p-3 bg-white border rounded-3 shadow-sm">
+            <span class="text-muted small">Pendentes</span>
+            <h2 class="fw-bold mb-0 text-warning">{{ pendentes }}</h2>
+        </div>
+    </div>
+
+    <!-- Form Section -->
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3">➕ Nova Tarefa</h5>
+                <form action="{{ url_for('add_task') }}" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Título *</label>
+                        <input type="text" name="title" class="form-control" placeholder="Ex.: Implementar Login" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Descrição</label>
+                        <textarea name="description" class="form-control" rows="3" placeholder="Detalhes opcionais..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Categoria</label>
+                        <select name="category" class="form-select">
+                            <option value="Desenvolvimento">Desenvolvimento</option>
+                            <option value="Configuração">Configuração</option>
+                            <option value="Testes">Testes</option>
+                            <option value="Geral" selected>Geral</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 fw-semibold">Adicionar Tarefa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tasks List Section -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-white py-3 border-0">
+                <h5 class="fw-bold mb-0">📋 Lista de Tarefas</h5>
+            </div>
+            <div class="card-body p-0">
+                {% if tasks %}
+                    <div class="list-group list-group-flush">
+                        {% for task in tasks %}
+                            <div class="list-group-item p-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <h6 class="mb-0 {% if task['status'] == 'CONCLUIDO' %}text-decoration-line-through text-muted{% else %}fw-bold{% endif %}">
+                                            {{ task['title'] }}
+                                        </h6>
+                                        <span class="badge bg-secondary opacity-75">{{ task['category'] }}</span>
+                                        {% if task['status'] == 'CONCLUIDO' %}
+                                            <span class="badge bg-success">Concluído</span>
+                                        {% else %}
+                                            <span class="badge bg-warning text-dark">Pendente</span>
+                                        {% endif %}
+                                    </div>
+                                    {% if task['description'] %}
+                                        <p class="small text-muted mb-0 mt-1">{{ task['description'] }}</p>
+                                    {% endif %}
+                                    <span class="text-muted extra-small d-block mt-1">{{ task['created_at'] }}</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <form action="{{ url_for('toggle_task', task_id=task['id']) }}" method="POST" class="d-inline">
+                                        <button type="submit" class="btn btn-sm {% if task['status'] == 'CONCLUIDO' %}btn-outline-secondary{% else %}btn-outline-success{% endif %}">
+                                            {% if task['status'] == 'CONCLUIDO' %}Desmarcar{% else %}Concluir{% endif %}
+                                        </button>
+                                    </form>
+                                    <form action="{{ url_for('delete_task', task_id=task['id']) }}" method="POST" class="d-inline" onsubmit="return confirm('Remover esta tarefa?');">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-5 text-muted">
+                        <p class="mb-0">Nenhuma tarefa cadastrada ainda.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
