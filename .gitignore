@@ -8,3 +8,5 @@ env/
 .env
 instance/
 .pytest_cache/
+*.egg-info/
+

@@ -1,7 +1,8 @@
 import os
 import sqlite3
-from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
+
 from dotenv import load_dotenv
+from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
 
 # Carrega variáveis de ambiente do .env
 load_dotenv()
@@ -13,7 +14,7 @@ app.secret_key = os.getenv("SECRET_KEY", "default-flask-secret")
 APP_TITLE = os.getenv("APP_TITLE", "Flask Project")
 APP_SUBTITLE = os.getenv("APP_SUBTITLE", "Gerenciador simples em Flask")
 DATABASE_PATH = os.getenv("DATABASE_PATH", "data/database.db")
-PORT = int(os.getenv("PORT", 5000))
+PORT = int(os.getenv("PORT", "5000"))
 
 def get_db():
     os.makedirs(os.path.dirname(DATABASE_PATH), exist_ok=True)
@@ -125,5 +126,9 @@ def api_tasks():
         "tasks": tasks_list
     })
 
-if __name__ == "__main__":
+def main():
     app.run(host="0.0.0.0", port=PORT, debug=True)
+
+if __name__ == "__main__":
+    main()
+
