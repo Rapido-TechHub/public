@@ -8,8 +8,7 @@ from app import app, init_db
 @pytest.fixture
 def client(tmp_path):
     os.environ["DATA_PATH"] = str(tmp_path)
-    db_file = tmp_path / "db" / "test_db.sqlite"
-    os.environ["DATABASE_PATH"] = str(db_file)
+    os.environ["DATABASE_PATH"] = "db/test_db.sqlite"
     app.config["TESTING"] = True
 
     init_db()
