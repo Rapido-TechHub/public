@@ -172,13 +172,63 @@ async function loadConfig() {
   }
 }
 
+function setupSidebar() {
+  const sidebar = $('#sidebar');
+  const overlay = $('#sidebar-overlay');
+  const toggleBtn = $('#sidebar-toggle');
+  const closeBtn = $('#sidebar-close');
+  const navLinks = document.querySelectorAll('.sidebar-link');
+  const contentSections = document.querySelectorAll('.content-section');
+
+  function openSidebar() {
+    sidebar?.classList.add('show');
+    overlay?.classList.add('show');
+  }
+
+  function closeSidebar() {
+    sidebar?.classList.remove('show');
+    overlay?.classList.remove('show');
+  }
+
+  toggleBtn?.addEventListener('click', openSidebar);
+  closeBtn?.addEventListener('click', closeSidebar);
+  overlay?.addEventListener('click', closeSidebar);
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('data-target');
+
+      navLinks.forEach((item) => item.classList.remove('active'));
+      link.classList.add('active');
+
+      if (targetId === 'section-students' || targetId === 'section-grades') {
+        contentSections.forEach((sec) => sec.classList.add('d-none'));
+        const dash = $('#section-dashboard');
+        dash?.classList.remove('d-none');
+        const targetElement = $(`#${targetId}`);
+        targetElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (targetId) {
+        contentSections.forEach((sec) => sec.classList.add('d-none'));
+        const targetSection = $(`#${targetId}`);
+        targetSection?.classList.remove('d-none');
+      }
+
+      closeSidebar();
+    });
+  });
+}
+
 $('#cancel-edit').addEventListener('click', resetStudentForm);
 $('#cancel-grade-edit').addEventListener('click', resetGradeForm);
 $('#refresh-button').addEventListener('click', () => loadStudents().catch((error) => showAlert(error.message, 'danger')));
 $('#student-search').addEventListener('input', renderStudents);
 
+setupSidebar();
+
 Promise.all([loadConfig(), loadStudents()])
   .catch((error) => showAlert(error.message, 'danger'))
   .finally(() => hideSplashScreen());
+
 
 
