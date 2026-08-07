@@ -1,4 +1,4 @@
-V1.0.1
+V1.0.2
 
 # Sistema de notas de alunos
 
