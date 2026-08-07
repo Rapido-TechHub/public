@@ -158,12 +158,27 @@ function hideSplashScreen() {
   }, remaining);
 }
 
+async function loadConfig() {
+  try {
+    const config = await api('/config');
+    if (config && config.appName) {
+      document.querySelectorAll('.app-brand-title').forEach((el) => {
+        el.textContent = config.appName;
+      });
+      document.title = `${config.appName} | Gestão de alunos`;
+    }
+  } catch (error) {
+    console.warn('Não foi possível carregar as configurações do aplicativo:', error);
+  }
+}
+
 $('#cancel-edit').addEventListener('click', resetStudentForm);
 $('#cancel-grade-edit').addEventListener('click', resetGradeForm);
 $('#refresh-button').addEventListener('click', () => loadStudents().catch((error) => showAlert(error.message, 'danger')));
 $('#student-search').addEventListener('input', renderStudents);
 
-loadStudents()
+Promise.all([loadConfig(), loadStudents()])
   .catch((error) => showAlert(error.message, 'danger'))
   .finally(() => hideSplashScreen());
+
 
