@@ -1,45 +1,44 @@
-V1.0.1
+# Projeto Flask - Hub de Tarefas & Ideias
 
-# Sistema de notas de alunos
+Aplicação web desenvolvida em **Python + Flask**, utilizando **SQLite** como banco de dados e variáveis de ambiente configuráveis via `.env`.
 
-CRUD básico desenvolvido com NestJS, TypeORM, SQLite e Bootstrap. O Express usado pelo Nest serve o frontend da pasta `public`.
+## 🚀 Como Executar
 
-## Executar
-
+### 1. Criar e ativar o ambiente virtual (opcional, mas recomendado)
 ```bash
-npm install
-npm run start:dev
+python -m venv venv
+# No Windows PowerShell:
+.\venv\Scripts\Activate.ps1
+# No Linux/macOS:
+source venv/bin/activate
 ```
 
-Acesse `http://localhost:3000`. O banco é criado automaticamente em `data/notas.sqlite`.
+### 2. Instalar as dependências
+```bash
+pip install -r requirements.txt
+```
 
-## API
-
-Todas as rotas possuem o prefixo `/api`:
-
-- `GET /students` — lista alunos com notas, média e situação.
-- `GET /students/:id` — consulta um aluno.
-- `POST /students` — cria aluno (`name`, `email` opcional).
-- `PATCH /students/:id` — atualiza aluno.
-- `DELETE /students/:id` — remove aluno e suas notas.
-- `POST /students/:studentId/grades` — cria nota (`subject`, `score` de 0 a 10).
-- `PATCH /students/:studentId/grades/:gradeId` — atualiza nota.
-- `DELETE /students/:studentId/grades/:gradeId` — remove nota.
-
-A situação é calculada pela média das notas: `APROVADO` para média maior ou igual a 6, `REPROVADO` abaixo de 6 e `PENDENTE` enquanto não houver notas.
-
-## Variáveis de ambiente
-
-O arquivo `.env` já vem configurado com estas variáveis:
-
+### 3. Configurar as variáveis de ambiente
+Edite ou crie o arquivo `.env` com base no `.env.example`:
 ```env
-PORT=3003
-APP_NAME=Sistema de Notas
-NODE_ENV=development
-DATABASE_PATH=data/notas.sqlite
-PASSING_SCORE=6
-MIN_SCORE=0
-MAX_SCORE=10
+APP_TITLE=Flask Hub de Projetos
+APP_SUBTITLE=Gerenciador simples de tarefas e ideias em Flask + SQLite
+PORT=5000
+FLASK_ENV=development
+DATABASE_PATH=data/database.db
+SECRET_KEY=sua_chave_secreta_super_segura_aqui
 ```
 
-`PASSING_SCORE` define a nota mínima para aprovação. `MIN_SCORE` e `MAX_SCORE` controlam os limites aceitos ao cadastrar uma nota. As demais variáveis configuram a porta, o nome exibido no log, o ambiente e o caminho do banco SQLite.
+### 4. Iniciar a aplicação
+```bash
+python app.py
+```
+
+Acesse em seu navegador: `http://localhost:5000`.
+
+## 📌 Rotas da API
+- `GET /` — Painel Web de tarefas.
+- `POST /tasks/add` — Adiciona uma nova tarefa.
+- `POST /tasks/<id>/toggle` — Alterna status da tarefa (PENDENTE / CONCLUIDO).
+- `POST /tasks/<id>/delete` — Remove uma tarefa.
+- `GET /api/tasks` — Endpoint JSON com a lista completa de tarefas.
