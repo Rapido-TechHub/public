@@ -36,3 +36,10 @@ def test_add_task(client):
     )
     assert response.status_code == 200
     assert b"Nova Tarefa de Teste" in response.data
+
+def test_infra_health(client):
+    for endpoint in ["/infra/health", "/api/infra/health"]:
+        response = client.get(endpoint)
+        assert response.status_code == 200
+        data = response.get_json()
+        assert data == {"status": "ok"}
