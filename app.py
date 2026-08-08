@@ -1,14 +1,38 @@
 import os
 import sqlite3
+import time
 
 from dotenv import load_dotenv
-from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
+from flask import Flask, flash, g, jsonify, redirect, render_template, request, url_for
+
+from logging_setup import log
 
 # Carrega variáveis de ambiente do .env
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "default-flask-secret")
+
+@app.before_request
+def _inicio():
+    g._t0 = time.perf_counter()
+
+@app.after_request
+def _registra(resp):
+    duration_ms = round((time.perf_counter() - getattr(g, "_t0", time.perf_counter())) * 1000, 1)
+    req_id = request.headers.get("x-request-id") or request.headers.get("X-Request-ID")
+    log_kwargs = {
+        "duration_ms": duration_ms,
+        "status_code": resp.status_code,
+    }
+    if req_id:
+        log_kwargs["request_id"] = req_id
+
+    if resp.status_code >= 500:
+        log.error(f"{request.method} {request.path}", **log_kwargs)
+    else:
+        log.info(f"{request.method} {request.path}", **log_kwargs)
+    return resp
 
 # Configurações do App obtidas do .env
 APP_TITLE = os.getenv("APP_TITLE", "Flask Project")

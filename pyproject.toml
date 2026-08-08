@@ -7,7 +7,8 @@ requires-python = ">=3.12"
 
 dependencies = [
     "flask>=3.0.0",
-    "python-dotenv>=1.0.0"
+    "python-dotenv>=1.0.0",
+    "structlog>=24.1.0"
 ]
 
 [project.scripts]
@@ -24,7 +25,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-py-modules = ["app"]
+py-modules = ["app", "logging_setup"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
