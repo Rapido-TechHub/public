@@ -139,6 +139,11 @@ def api_tasks():
         "tasks": tasks_list
     })
 
+@app.route("/infra/health", methods=["GET"])
+@app.route("/api/infra/health", methods=["GET"])
+def infra_health():
+    return jsonify({"status": "ok"})
+
 def main():
     app.run(host="0.0.0.0", port=PORT, debug=True)
 

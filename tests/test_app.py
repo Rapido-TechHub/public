@@ -43,3 +43,11 @@ def test_index_filter_category(client):
     assert b"Filtro: Desenvolvimento" in response.data
     assert b"Criar estrutura Flask" in response.data
 
+def test_infra_health(client):
+    for endpoint in ["/infra/health", "/api/infra/health"]:
+        response = client.get(endpoint)
+        assert response.status_code == 200
+        data = response.get_json()
+        assert data == {"status": "ok"}
+
+

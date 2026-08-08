@@ -42,3 +42,4 @@ Acesse em seu navegador: `http://localhost:5000`.
 - `POST /tasks/<id>/toggle` — Alterna status da tarefa (PENDENTE / CONCLUIDO).
 - `POST /tasks/<id>/delete` — Remove uma tarefa.
 - `GET /api/tasks` — Endpoint JSON com a lista completa de tarefas.
+- `GET /infra/health` — Endpoint de verificação de saúde (health check).
