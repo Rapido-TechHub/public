@@ -2,6 +2,9 @@ body {
     background-color: #f8fafc;
     color: #1e293b;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .bg-gradient-navy {
@@ -40,3 +43,75 @@ body {
     background-color: #1d4ed8;
     border-color: #1d4ed8;
 }
+
+/* Sidebar & Layout Styles */
+.app-wrapper {
+    display: flex;
+    flex: 1;
+    min-height: calc(100vh - 56px);
+}
+
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    padding: 1.5rem 1rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.sidebar .nav-link {
+    color: #475569;
+    font-weight: 500;
+    padding: 0.65rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-link:hover {
+    color: #2563eb;
+    background-color: #eff6ff;
+}
+
+.sidebar .nav-link.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.sidebar-heading {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #94a3b8;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0.75rem;
+}
+
+.main-content {
+    flex: 1;
+    padding: 1.5rem 2rem;
+    overflow-x: hidden;
+}
+
+@media (max-width: 767.98px) {
+    .app-wrapper {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 1rem;
+    }
+    .main-content {
+        padding: 1rem;
+    }
+}
+

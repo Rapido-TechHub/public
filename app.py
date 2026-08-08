@@ -65,15 +65,26 @@ def inject_global_vars():
 
 @app.route("/")
 def index():
+    selected_category = request.args.get("category", "").strip()
     conn = get_db()
-    tasks = conn.execute("SELECT * FROM tasks ORDER BY created_at DESC").fetchall()
+    if selected_category:
+        tasks = conn.execute("SELECT * FROM tasks WHERE category = ? ORDER BY created_at DESC", (selected_category,)).fetchall()
+    else:
+        tasks = conn.execute("SELECT * FROM tasks ORDER BY created_at DESC").fetchall()
     
     total = len(tasks)
     concluidas = sum(1 for t in tasks if t["status"] == "CONCLUIDO")
     pendentes = total - concluidas
     
     conn.close()
-    return render_template("index.html", tasks=tasks, total=total, concluidas=concluidas, pendentes=pendentes)
+    return render_template(
+        "index.html",
+        tasks=tasks,
+        total=total,
+        concluidas=concluidas,
+        pendentes=pendentes,
+        selected_category=selected_category
+    )
 
 @app.route("/tasks/add", methods=["POST"])
 def add_task():

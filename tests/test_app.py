@@ -36,3 +36,10 @@ def test_add_task(client):
     )
     assert response.status_code == 200
     assert b"Nova Tarefa de Teste" in response.data
+
+def test_index_filter_category(client):
+    response = client.get("/?category=Desenvolvimento")
+    assert response.status_code == 200
+    assert b"Filtro: Desenvolvimento" in response.data
+    assert b"Criar estrutura Flask" in response.data
+

@@ -62,8 +62,14 @@
     <!-- Tasks List Section -->
     <div class="col-lg-8">
         <div class="card border-0 shadow-sm rounded-3">
-            <div class="card-header bg-white py-3 border-0">
+            <div class="card-header bg-white py-3 border-0 d-flex justify-content-between align-items-center flex-wrap gap-2">
                 <h5 class="fw-bold mb-0">📋 Lista de Tarefas</h5>
+                {% if selected_category %}
+                    <span class="badge bg-primary fs-6 px-3 py-2 fw-normal">
+                        Filtro: {{ selected_category }}
+                        <a href="{{ url_for('index') }}" class="text-white ms-2 text-decoration-none" title="Limpar filtro">✕</a>
+                    </span>
+                {% endif %}
             </div>
             <div class="card-body p-0">
                 {% if tasks %}
