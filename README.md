@@ -17,6 +17,7 @@ Acesse `http://localhost:3000`. O banco é criado automaticamente em `data/notas
 
 Todas as rotas possuem o prefixo `/api`:
 
+- `GET /infra/health` — endpoint de verificação de saúde (health check).
 - `GET /students` — lista alunos com notas, média e situação.
 - `GET /students/:id` — consulta um aluno.
 - `POST /students` — cria aluno (`name`, `email` opcional).

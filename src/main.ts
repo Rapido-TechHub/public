@@ -10,7 +10,9 @@ async function bootstrap() {
   mkdirSync(dirname(resolve(env.databasePath)), { recursive: true });
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.setGlobalPrefix("api");
+  app.setGlobalPrefix("api", {
+    exclude: ["infra/health"],
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

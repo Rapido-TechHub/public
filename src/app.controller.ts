@@ -9,4 +9,11 @@ export class AppController {
       appName: env.appName,
     };
   }
+
+  @Get(["infra/health", "api/infra/health"])
+  getHealth(): { status: string } {
+    return {
+      status: "ok",
+    };
+  }
 }
