@@ -11,7 +11,7 @@ npm install
 npm run start:dev
 ```
 
-Acesse `http://localhost:3000`. O banco é criado automaticamente em `data/notas.sqlite`.
+Acesse `http://localhost:3003`. O banco é criado automaticamente em `data/notas.sqlite`.
 
 ## API
 
@@ -37,7 +37,8 @@ O arquivo `.env` já vem configurado com estas variáveis:
 PORT=3003
 APP_NAME=Sistema de Notas
 NODE_ENV=development
-DATABASE_PATH=data/notas.sqlite
+DATA_PATH=/data
+DATABASE_PATH=notas.sqlite
 PASSING_SCORE=6
 MIN_SCORE=0
 MAX_SCORE=10
