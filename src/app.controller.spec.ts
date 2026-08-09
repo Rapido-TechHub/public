@@ -28,4 +28,10 @@ describe("AppController", () => {
       });
     });
   });
+
+  describe("triggerTestError", () => {
+    it("should throw InternalServerErrorException", () => {
+      expect(() => appController.triggerTestError()).toThrow();
+    });
+  });
 });

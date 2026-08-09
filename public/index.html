@@ -93,7 +93,16 @@
               <h1 class="display-6 fw-bold mb-1">Alunos e desempenho</h1>
               <p class="text-secondary mb-0">Cadastre alunos, lance notas e acompanhe a situação da turma.</p>
             </div>
-            <button class="btn btn-outline-primary" id="refresh-button">Atualizar dados</button>
+            <div class="d-flex gap-2">
+              <button class="btn btn-outline-danger d-inline-flex align-items-center gap-1 trigger-test-error-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/>
+                </svg>
+                Simular Erro
+              </button>
+              <button class="btn btn-outline-primary" id="refresh-button">Atualizar dados</button>
+            </div>
           </div>
 
           <section class="row g-3 mb-4" id="stats">
@@ -215,6 +224,29 @@
                 <span class="text-secondary small d-block">Banco de Dados:</span>
                 <strong>SQLite (data/notas.sqlite)</strong>
               </div>
+            </div>
+          </div>
+
+          <div class="card border-0 shadow-sm p-4 max-w-600">
+            <h3 class="h5 fw-bold mb-2">Diagnóstico de Logs do Servidor</h3>
+            <p class="text-secondary small mb-3">
+              Dispare um erro proposital no endpoint <code>/api/test-error</code> para testar e verificar a emissão dos logs detalhados (pino) no terminal do servidor.
+            </p>
+            <div>
+              <button class="btn btn-danger d-inline-flex align-items-center gap-2 trigger-test-error-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/>
+                </svg>
+                Gerar Erro Proposital e Emitir Log
+              </button>
+            </div>
+            <div id="test-error-output" class="mt-3 p-3 bg-light rounded border d-none">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="badge bg-danger">Resposta do Servidor (HTTP 500)</span>
+                <span class="text-muted extra-small" id="test-error-timestamp"></span>
+              </div>
+              <pre class="mb-0 text-dark small font-monospace overflow-auto" style="max-height: 200px;" id="test-error-json"></pre>
             </div>
           </div>
         </section>

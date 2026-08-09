@@ -219,16 +219,53 @@ function setupSidebar() {
   });
 }
 
+async function triggerSimulatedError() {
+  const outputDiv = $('#test-error-output');
+  const outputPre = $('#test-error-json');
+  const outputTs = $('#test-error-timestamp');
+  const buttons = document.querySelectorAll('.trigger-test-error-btn');
+
+  buttons.forEach((btn) => {
+    btn.disabled = true;
+  });
+
+  try {
+    const response = await fetch('/api/test-error');
+    const data = await response.json();
+
+    if (outputDiv && outputPre) {
+      outputDiv.classList.remove('d-none');
+      outputPre.textContent = JSON.stringify(data, null, 2);
+      if (outputTs) outputTs.textContent = new Date().toLocaleTimeString('pt-BR');
+    }
+
+    showAlert(
+      `[HTTP ${response.status}] ${data.error_code || 'ERR_TEST'}: ${data.message || 'Erro gerado para teste de logs.'}`,
+      'danger',
+    );
+  } catch (error) {
+    showAlert(`Falha ao conectar com o endpoint: ${error.message}`, 'danger');
+  } finally {
+    buttons.forEach((btn) => {
+      btn.disabled = false;
+    });
+  }
+}
+
 $('#cancel-edit').addEventListener('click', resetStudentForm);
 $('#cancel-grade-edit').addEventListener('click', resetGradeForm);
 $('#refresh-button').addEventListener('click', () => loadStudents().catch((error) => showAlert(error.message, 'danger')));
 $('#student-search').addEventListener('input', renderStudents);
+document.querySelectorAll('.trigger-test-error-btn').forEach((btn) => {
+  btn.addEventListener('click', triggerSimulatedError);
+});
 
 setupSidebar();
 
 Promise.all([loadConfig(), loadStudents()])
   .catch((error) => showAlert(error.message, 'danger'))
   .finally(() => hideSplashScreen());
+
 
 
 
