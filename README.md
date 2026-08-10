@@ -1,7 +1,7 @@
 # Projeto Flask - Hub de Tarefas & Ideias
 
 Aplicação web desenvolvida em **Python + Flask**, utilizando **SQLite** como banco de dados e variáveis de ambiente configuráveis via `.env`.
-
+# gustavo
 ## 🚀 Como Executar
 
 ### 1. Criar e ativar o ambiente virtual (opcional, mas recomendado)
