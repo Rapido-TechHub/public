@@ -1,4 +1,4 @@
-# Projeto Flask - Hub de Tarefas & Ideias v3
+# Projeto Flask - Hub de Tarefas & Ideias v4
 
 Aplicação web desenvolvida em **Python + Flask**, utilizando **SQLite** como banco de dados e variáveis de ambiente configuráveis via `.env`.
 # gustavo
